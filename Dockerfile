@@ -1,5 +1,5 @@
-FROM alpine:3.2
-MAINTAINER dengnan@google.com vmarmol@google.com vishnuk@google.com jimmidyson@gmail.com
+FROM        sdurrheimer/alpine-golang-make-onbuild
+MAINTAINER erhankesken@gmail.com
 
 RUN apk add --update ca-certificates device-mapper && \
     wget https://circle-artifacts.com/gh/andyshinn/alpine-pkg-glibc/8/artifacts/0/home/ubuntu/alpine-pkg-glibc/packages/x86_64/glibc-2.21-r2.apk && \
@@ -9,8 +9,4 @@ RUN apk add --update ca-certificates device-mapper && \
     echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf && \
     rm -rf /var/cache/apk/*
 
-# Grab cadvisor from the staging directory.
-ADD . /usr/bin/cadvisor
-
 EXPOSE 8080
-ENTRYPOINT ["/usr/bin/cadvisor", "-logtostderr"]
