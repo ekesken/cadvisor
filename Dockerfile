@@ -28,5 +28,5 @@ RUN apk add --update alpine-sdk go linux-headers && \
 RUN ln -s $CADVISOR_PATH/cadvisor /usr/local/bin/cadvisor
 
 EXPOSE 8080
-ENTRYPOINT ["/usr/local/bin/cadvisor", "-logtostderr"]
+CMD ["/usr/local/bin/cadvisor", "-logtostderr"]
 
